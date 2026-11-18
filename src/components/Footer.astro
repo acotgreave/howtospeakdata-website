@@ -1,0 +1,33 @@
+---
+import logo from '../assets/logo-mark-reversed.svg';
+import { site, asset } from '../lib/site';
+
+const year = new Date().getFullYear(); // rebuilt daily, so this rolls over on its own
+---
+<footer class="footer">
+  <div class="wrap footer__inner">
+    <img src={logo.src} alt="" width="31" height="34" />
+    <span class="footer__name">How To Speak Data</span>
+    <nav class="footer__nav" aria-label="Social">
+      <a href={site.links.linkedin} target="_blank" rel="noopener">LinkedIn</a>
+      <a href={site.links.youtube} target="_blank" rel="noopener">YouTube</a>
+      <a href={site.links.newsletter} target="_blank" rel="noopener">Substack</a>
+      <a href={asset('#contact')}>Contact</a>
+    </nav>
+    <p class="footer__legal">© {year} Andy Cotgreave. All rights reserved.</p>
+  </div>
+</footer>
+
+<style>
+  .footer { background: var(--ink); color: var(--link-on-dark); }
+  .footer__inner { padding-top: 40px; padding-bottom: 40px; display: flex; align-items: center; gap: 32px; flex-wrap: wrap; }
+  .footer img { height: 34px; width: auto; display: block; }
+  .footer__name { font-family: var(--font-display); font-weight: 600; font-size: 14px; color: var(--white); }
+  .footer__nav { margin-left: auto; display: flex; gap: 24px; flex-wrap: wrap; }
+  .footer__nav a { font-size: 15px; color: var(--link-on-dark); }
+  .footer__nav a:hover { color: var(--white); }
+  .footer__legal {
+    flex-basis: 100%; margin-top: -8px; padding-top: 20px; border-top: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 14px; color: var(--link-on-dark);
+  }
+</style>

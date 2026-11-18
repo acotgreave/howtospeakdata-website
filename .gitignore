@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.astro/
+.DS_Store
+Thumbs.db
+
+# Local-only: design handoff, the original zip and Claude scratch outputs
+_handoff/
+*.zip
+Claude outputs/

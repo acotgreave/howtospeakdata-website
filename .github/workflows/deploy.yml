@@ -1,0 +1,72 @@
+name: Update feeds and deploy
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: '17 5 * * *' # daily, 05:17 UTC
+  workflow_dispatch: # "Run workflow" button in the Actions tab
+
+permissions:
+  contents: write # commit refreshed feeds.json
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - run: npm ci
+
+      - name: Fetch latest YouTube / Substack items
+        run: npm run feeds
+        env:
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+
+      - name: Commit feed changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if ! git diff --quiet src/data/feeds.json; then
+            git commit -m "Update latest content feeds" src/data/feeds.json
+            git pull --rebase && git push
+          elif [ "${{ github.event_name }}" = "schedule" ] && \
+               [ $(( $(date +%s) - $(git log -1 --format=%ct) )) -gt $(( 45 * 86400 )) ]; then
+            # GitHub pauses scheduled workflows after 60 days without a commit.
+            git commit --allow-empty -m "Keep scheduled feed updates active"
+            git pull --rebase && git push
+          fi
+
+      - id: pages
+        uses: actions/configure-pages@v5
+
+      - name: Build
+        run: npm run build
+        env:
+          SITE: ${{ steps.pages.outputs.origin }}
+          BASE_PATH: ${{ steps.pages.outputs.base_path }}
+
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

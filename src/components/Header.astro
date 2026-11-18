@@ -1,0 +1,79 @@
+---
+import logo from '../assets/logo-mark.svg';
+import { site, asset } from '../lib/site';
+
+const home = asset('');
+const nav = [
+  { label: 'Speaking', href: home + '#speaking' },
+  { label: 'Content', href: home + '#content' },
+  { label: 'Books', href: home + '#books' },
+  { label: 'About', href: home + '#about' },
+];
+---
+<header class="header">
+  <div class="wrap header__inner">
+    <a href={home} class="brand">
+      <img src={logo.src} alt="" width="27" height="30" />
+      <span>How To<br />Speak Data</span>
+    </a>
+    <button class="menu-toggle" aria-expanded="false" aria-controls="site-nav">
+      <span class="sr-only">Menu</span>
+      <svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true"><path d="M3 6h16M3 11h16M3 16h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+    <nav id="site-nav" class="nav" aria-label="Main">
+      {nav.map((n) => <a href={n.href} class="nav__link">{n.label}</a>)}
+      <a href={home + '#contact'} class="btn btn--primary btn--sm">Get in touch</a>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const toggle = document.querySelector<HTMLButtonElement>('.menu-toggle')!;
+  const nav = document.getElementById('site-nav')!;
+  const set = (open: boolean) => {
+    toggle.setAttribute('aria-expanded', String(open));
+    nav.classList.toggle('is-open', open);
+  };
+  toggle.addEventListener('click', () => set(toggle.getAttribute('aria-expanded') !== 'true'));
+  nav.addEventListener('click', (e) => { if ((e.target as Element).closest('a')) set(false); });
+</script>
+
+<style>
+  .header {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(250, 249, 246, 0.94);
+    backdrop-filter: saturate(1.2) blur(6px);
+    -webkit-backdrop-filter: saturate(1.2) blur(6px);
+    border-bottom: 1px solid var(--hairline);
+  }
+  .header__inner { display: flex; align-items: center; gap: 32px; padding-top: 14px; padding-bottom: 14px; }
+  .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+  .brand:hover { text-decoration: none; }
+  .brand img { height: 30px; width: auto; display: block; }
+  .brand span {
+    font-family: var(--font-display); font-weight: 800; font-size: 15px;
+    letter-spacing: -0.01em; color: var(--navy); line-height: 1.1;
+  }
+  .nav { margin-left: auto; display: flex; align-items: center; gap: 28px; }
+  .nav__link { font-family: var(--font-display); font-weight: 500; font-size: 15px; color: var(--body); }
+  .nav__link:hover { color: var(--navy); text-decoration: none; }
+
+  .menu-toggle {
+    display: none; margin-left: auto; background: none; border: 1px solid var(--hairline);
+    border-radius: var(--radius); padding: 7px; color: var(--navy); cursor: pointer;
+  }
+  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+  @media (max-width: 760px) {
+    .menu-toggle { display: block; }
+    .nav {
+      display: none; position: absolute; left: 0; right: 0; top: 100%;
+      flex-direction: column; align-items: stretch; gap: 0;
+      background: var(--paper); border-bottom: 1px solid var(--hairline);
+      padding: 8px var(--gutter) 20px;
+    }
+    .nav.is-open { display: flex; }
+    .nav__link { padding: 12px 0; border-bottom: 1px solid var(--hairline); font-size: 17px; }
+    .nav .btn { margin-top: 16px; }
+  }
+</style>

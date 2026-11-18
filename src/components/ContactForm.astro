@@ -1,0 +1,185 @@
+---
+// Enquiry form. Web3Forms emails each submission to Andy, with reply-to set to
+// the sender. Without an access key in site.yaml it runs in test mode.
+import { site } from '../lib/site';
+
+const key = site.links.web3forms_key ?? '';
+const types: { label: string; event?: boolean }[] = site.links.enquiry_types ?? [{ label: 'Keynote', event: true }];
+const subject: string = site.links.enquiry_subject ?? '{type} enquiry';
+---
+<form class="enquiry" action="https://api.web3forms.com/submit" method="POST" data-key={key ? 'set' : ''} novalidate>
+  <input type="hidden" name="access_key" value={key} />
+  <input type="hidden" name="subject" value={subject.replace('{type}', 'General')} data-template={subject} />
+  <input type="hidden" name="from_name" value="howtospeakdata.com" />
+  <!-- Spam trap: people never see or tick this; bots do -->
+  <input type="checkbox" name="botcheck" class="enquiry__trap" tabindex="-1" autocomplete="off" aria-hidden="true" />
+
+  <fieldset class="enquiry__types">
+    <legend>What can I help with? <i aria-hidden="true">*</i></legend>
+    <div class="enquiry__chips">
+      {types.map((t, i) => (
+        <label class="enquiry__chip">
+          <input type="radio" name="enquiry_type" value={t.label} data-event={t.event ? 'yes' : undefined} required={i === 0} />
+          <span>{t.label}</span>
+        </label>
+      ))}
+    </div>
+  </fieldset>
+
+  <div class="enquiry__grid">
+    <label class="enquiry__field">
+      <span>Name <i aria-hidden="true">*</i></span>
+      <input type="text" name="name" autocomplete="name" required />
+    </label>
+    <label class="enquiry__field">
+      <span>Email <i aria-hidden="true">*</i></span>
+      <input type="email" name="email" autocomplete="email" required />
+    </label>
+    <label class="enquiry__field">
+      <span>Organisation</span>
+      <input type="text" name="organisation" autocomplete="organization" />
+    </label>
+    <label class="enquiry__field" data-event-only>
+      <span>Event date(s)</span>
+      <input type="text" name="event_dates" placeholder="e.g. May 2027, or TBC" />
+    </label>
+    <label class="enquiry__field" data-event-only>
+      <span>Location</span>
+      <input type="text" name="location" placeholder="City, or virtual" />
+    </label>
+    <label class="enquiry__field" data-event-only>
+      <span>Audience size</span>
+      <input type="text" name="audience_size" placeholder="e.g. 300" />
+    </label>
+    <label class="enquiry__field enquiry__field--wide">
+      <span><span data-message-label>Tell me what you're looking for</span> <i aria-hidden="true">*</i></span>
+      <textarea name="message" rows="5" required placeholder="A few lines about what you need and when."></textarea>
+    </label>
+  </div>
+
+  <div class="enquiry__actions">
+    <button type="submit" class="btn btn--primary btn--lg">Send enquiry</button>
+    <p class="enquiry__status" role="status" aria-live="polite"></p>
+  </div>
+  <p class="enquiry__note">Your details only come to me. They're delivered by Web3Forms and never added to a mailing list.</p>
+</form>
+
+<script>
+  document.querySelectorAll<HTMLFormElement>('form.enquiry').forEach((form) => {
+    const status = form.querySelector<HTMLElement>('.enquiry__status')!;
+    const button = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
+    const say = (text: string, tone: 'ok' | 'error' | '' = '') => {
+      status.textContent = text;
+      status.dataset.tone = tone;
+    };
+
+    // Show event questions only for event-type enquiries, and tailor the wording
+    const eventOnly = form.querySelectorAll<HTMLElement>('[data-event-only]');
+    const messageLabel = form.querySelector<HTMLElement>('[data-message-label]')!;
+    const message = form.querySelector<HTMLTextAreaElement>('textarea[name="message"]')!;
+    const subject = form.querySelector<HTMLInputElement>('input[name="subject"]')!;
+    const applyType = () => {
+      const picked = form.querySelector<HTMLInputElement>('input[name="enquiry_type"]:checked');
+      const isEvent = !picked || picked.dataset.event === 'yes';
+      eventOnly.forEach((el) => {
+        el.hidden = !isEvent;
+        el.querySelectorAll('input').forEach((i) => (i.disabled = !isEvent)); // disabled fields aren't sent
+      });
+      messageLabel.textContent = picked && isEvent ? 'Tell me about your event' : "Tell me what you're looking for";
+      message.placeholder = picked && isEvent
+        ? "Who's in the audience, and what would you like them to leave with?"
+        : 'A few lines about what you need and when.';
+      subject.value = subject.dataset.template!.replace('{type}', picked?.value ?? 'General');
+    };
+    form.addEventListener('change', (e) => {
+      if ((e.target as HTMLInputElement).name === 'enquiry_type') applyType();
+    });
+    applyType();
+
+    // Buttons elsewhere can pre-pick an option: <a href="#contact" data-enquiry-type="Keynote">
+    document.addEventListener('click', (e) => {
+      const type = (e.target as Element).closest<HTMLElement>('[data-enquiry-type]')?.dataset.enquiryType;
+      const radio = [...form.querySelectorAll<HTMLInputElement>('input[name="enquiry_type"]')].find((r) => r.value === type);
+      if (radio) {
+        radio.checked = true;
+        applyType();
+      }
+    });
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+      if (!form.dataset.key) {
+        say('Test mode: the form works, but nothing was sent. Add the Web3Forms key in site.yaml to switch it on.', 'error');
+        return;
+      }
+      button.disabled = true;
+      say('Sending…');
+      try {
+        const res = await fetch(form.action, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify(Object.fromEntries(new FormData(form))),
+        });
+        const data = await res.json();
+        if (!res.ok || !data.success) throw new Error(data.message || res.statusText);
+        form.reset();
+        applyType();
+        say("Thanks! Your enquiry is on its way. I'll reply by email soon.", 'ok');
+      } catch {
+        say("Sorry, that didn't send. Please try again, or use the copy-email button.", 'error');
+      } finally {
+        button.disabled = false;
+      }
+    });
+  });
+</script>
+
+<style>
+  .enquiry {
+    background: var(--white); color: var(--ink); border-radius: var(--radius);
+    padding: 28px; box-shadow: none;
+  }
+  .enquiry__trap { position: absolute; left: -9999px; }
+  .enquiry__types { border: 0; padding: 0; margin: 0 0 20px; }
+  .enquiry__types legend { padding: 0; margin-bottom: 10px; font-family: var(--font-display); font-weight: 600; font-size: 13px; color: var(--ink); }
+  .enquiry__types legend i { font-style: normal; color: var(--accent); }
+  .enquiry__chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .enquiry__chip { position: relative; cursor: pointer; }
+  .enquiry__chip input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+  .enquiry__chip span {
+    display: inline-block; padding: 8px 14px; border-radius: 999px; border: 1px solid #C9CED6;
+    font-size: 15px; color: var(--ink); background: var(--white); transition: background-color .15s, border-color .15s, color .15s;
+  }
+  .enquiry__chip:hover span { border-color: var(--navy); }
+  .enquiry__chip input:checked + span { background: var(--navy); border-color: var(--navy); color: var(--white); }
+  .enquiry__chip input:focus-visible + span { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .enquiry__field[hidden] { display: none; }
+  .enquiry__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px 18px; }
+  .enquiry__field { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+  .enquiry__field--wide { grid-column: 1 / -1; }
+  .enquiry__field span { font-family: var(--font-display); font-weight: 600; font-size: 13px; color: var(--ink); }
+  .enquiry__field i { font-style: normal; color: var(--accent); }
+  .enquiry input, .enquiry textarea {
+    width: 100%; font: inherit; font-size: 16px; color: var(--ink);
+    padding: 10px 12px; border: 1px solid #C9CED6; border-radius: var(--radius); background: var(--white);
+  }
+  .enquiry textarea { resize: vertical; min-height: 120px; }
+  .enquiry input::placeholder, .enquiry textarea::placeholder { color: #8A96A6; }
+  .enquiry input:focus, .enquiry textarea:focus { outline: 2px solid var(--accent); outline-offset: 0; border-color: var(--accent); }
+  .enquiry__actions { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin-top: 22px; }
+  .enquiry button { border: 0; cursor: pointer; }
+  .enquiry button:disabled { opacity: .6; cursor: wait; }
+  .enquiry__status { font-size: 15px; color: var(--body); flex: 1; min-width: 200px; }
+  .enquiry__status[data-tone='ok'] { color: #1D7A45; font-weight: 600; }
+  .enquiry__status[data-tone='error'] { color: #B4321E; }
+  .enquiry__note { margin-top: 14px; font-size: 13px; color: var(--muted); }
+
+  @media (max-width: 760px) {
+    .enquiry { padding: 20px; }
+    .enquiry__grid { grid-template-columns: 1fr; }
+  }
+</style>

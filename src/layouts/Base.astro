@@ -1,0 +1,55 @@
+---
+import '../styles/global.css';
+import { getImage } from 'astro:assets';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import hero from '../assets/photos/keynote-leadership.jpg';
+import { site, asset } from '../lib/site';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+const { title = site.site.title, description = site.site.description } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImage = await getImage({ src: hero, width: 1200, height: 630, fit: 'cover', format: 'jpg' });
+
+const person = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Andy Cotgreave',
+  jobTitle: 'Keynote speaker, author and independent data advisor',
+  url: Astro.site?.href,
+  email: `mailto:${site.site.email}`,
+  sameAs: [site.links.linkedin, site.links.youtube, site.links.newsletter],
+};
+---
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href={asset('favicon.svg')} type="image/svg+xml" />
+    <meta name="theme-color" content="#14336B" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={new URL(ogImage.src, Astro.site)} />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <script type="application/ld+json" set:html={JSON.stringify(person)} />
+  </head>
+  <body>
+    <a href="#main" class="skip-link">Skip to content</a>
+    <Header />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

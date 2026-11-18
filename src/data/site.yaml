@@ -1,0 +1,198 @@
+# ─────────────────────────────────────────────────────────────
+# How To Speak Data — site content
+#
+# Almost everything you'd want to change lives in this file.
+# Edit, commit, push: the site rebuilds itself.
+#
+# Tips
+# - Wrap text in "double quotes" if it contains a colon (:).
+# - Leave a url as "" to hide that button/link until it's ready.
+# ─────────────────────────────────────────────────────────────
+
+site:
+  title: "Andy Cotgreave: Keynote Speaker on AI and data"
+  description: "Andy Cotgreave is an author, independent data industry expert and keynote speaker. He's spent twenty years helping people enjoy, not endure, data."
+  email: andy@howtospeakdata.com
+
+links:
+  book: https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ1p0qUydPTMO3RcjmcLY5Vw37-KiAuzNtrpuIF1clypBsru3p6l2uKK_EcFu4OqUElF9TsqWOcq
+  newsletter: https://howtospeakdata.substack.com/
+  linkedin: https://www.linkedin.com/in/acotgreave/
+  youtube: https://www.youtube.com/@AndyCotgreave
+  # Enquiry form, delivered to your inbox by Web3Forms (https://web3forms.com).
+  # Paste the access key they email you. Until then the form runs in test mode and sends nothing.
+  web3forms_key: "44d7fae8-ae2d-4ace-8103-b86136588286"
+  # Email subject; {type} becomes the option they picked, e.g. "Mentoring enquiry from howtospeakdata.com"
+  enquiry_subject: "{type} enquiry from howtospeakdata.com"
+  # The "What can I help with?" choices. event: true also asks for dates, location and audience size.
+  enquiry_types:
+    - label: "Keynote"
+      event: true
+    - label: "Event emcee"
+      event: true
+    - label: "Training or workshop"
+      event: true
+    - label: "Mentoring"
+    - label: "Brand partnership"
+    - label: "Something else"
+  # Put files in /public/downloads/ and set e.g. "downloads/one-sheet.pdf"
+  one_sheet: ""
+  bio_pack: ""
+
+hero:
+  eyebrow: "Andy Cotgreave: Keynote Speaker on AI and data"
+  heading: "Twenty years helping people enjoy, not endure, data."
+  sub: "I care about  data communication, and how it is infused by science, history, philosophy, and more. I consider deeply how AI impacts our world. Conference organisers book me for the same reason: your audience will leave informed, educated and entertained. "
+  # Photo collage (1–3 photos): the first is the large tile on the left; with 3, the other two stack on the right.
+  #   image: a file name in src/assets/photos/   position: crop focus ("x% y%")
+  #   zoom: optional, e.g. 1.3 to enlarge the photo within its tile
+  #   label: small tag on the photo (leave "" for none)
+  images:
+    - image: dis-2026-wide.jpg
+      alt: "Andy Cotgreave keynoting at Data Innovation Summit 2026, with his name on the giant stage screen"
+      label: ""
+      position: "50% 50%"
+
+stats:
+  - value: "20 years"
+    label: "Data communication career"
+  - value: "2 books"
+    label: "On data application design"
+  - value: ">20k"
+    label: "LinkedIn followers"
+  
+speaking:
+  heading: "I've keynoted at events on four continents."
+  paragraphs:
+    - "My philosophy is to inform, educate and entertain. My keynotes are suitable for any audience: everyone encounters data during their work day. I take inspiration from all disciplines and weave narratives that fit contemporary trends."
+    - "I also emcee events, and I'm good at it. If your event needs a thread running through two days, that's a real skill and I have it."
+  topics:
+    - title: "AI, Data and Society"
+      text: "The honest state of AI in analytics: what works, what's theatre, what to do on Monday."
+      url: ""
+    - title: "Data Communication"
+      text: "Twenty years of what actually persuades people, distilled into things you can use."
+      url: ""
+    - title: "The History of Data"
+      text: "Nothing is new in analytics. A talk that makes today's hype legible by looking back."
+      url: ""
+    - title: "Event emcee"
+      text: "Holding a multi-day agenda together, on stage, without the wheels coming off."
+      url: ""
+  # Video carousel, in display order. Only url, title and caption are needed.
+  #   url:      a YouTube link (youtu.be/… or youtube.com/watch?v=…); ?t=15 starts at 0:15
+  #   image:    optional photo in src/assets/photos/ (otherwise the YouTube thumbnail is used)
+  #   position: optional crop focus for the image, e.g. "30% 40%"
+  videos:
+    - title: "Why human insight matters more than ever in the age of AI"
+      caption: "Data Innovation Summit, Stockholm 2026"
+      url: https://youtu.be/3_ggCQh-u20?t=15
+      image: dis-2026-stage.jpg
+      alt: "Andy Cotgreave on stage at Data Innovation Summit 2026"
+      position: "50% 55%"
+    - title: "The Duel of the Data Experts"
+      caption: "Big Data LDN, London 2026"
+      url: https://youtu.be/yEzMRpP18G4?t=5
+      image: big-data-london-panel.jpg
+      alt: "Andy Cotgreave on stage at Big Data LDN 2026"
+      position: "60% 30%"
+    - title: "Nothing is new in analytics"
+      caption: "Data Decoded, Manchester 2025"
+      url: https://www.youtube.com/watch?v=iVmnNKEd2G4
+      image: keynote-datadecoded.jpg
+      alt: "Nothing is new in analytics, Data Decoded Manchester"
+      position: "50% 55%"
+    - title: "Iron Viz, live on the main stage"
+      caption: "Emceeing for a 8,000-seat room"
+      url: https://youtu.be/X82_Ehg7xqI
+      image: ironviz-stage-camera.jpg
+      alt: "Andy Cotgreave hosting Iron Viz"
+      position: "30% 40%"
+
+testimonials:
+  #- quote: "Andy was the highest-rated speaker at Compass AI & Tech Summit 2026, and for all the right reasons! His ability to turn complex ideas into easy to follow, engaging and thought-provoking insights really resonated with our audience. We'd be delighted to welcome him back!"
+  - quote: "Andy was the highest-rated speaker at Compass AI & Tech Summit 2026, and for all the right reasons! We'd be delighted to welcome him back."
+    name: "Daria Schirrmeister, Speaker Coordinator, Compass Tech Summit"
+    # A testimonial with a photo is shown large, above the others
+    photo: compass-stage.jpg
+    photo_alt: "Andy Cotgreave on stage at Compass AI & Tech Summit"
+    photo_position: "40% 50%"
+  - quote: "Andy's keynote talk was insightful, honest and thought-provoking, prompting us all to think differently about data. His insights were the subject of much discussion during and after the event."
+    name: "Lisa Chilton, CEO National Biodiversity Network"
+  - quote: "His expertise in data analytics communication is world-class, and he brings it to every conversation in a way that's practical and actionable"
+    name: "Marcos Monteiro - CEO Veezoo"
+
+
+# file: a file name in src/assets/logos/  ·  height in px
+spoken_at:
+  - file: tableau.png
+    alt: "Tableau Conference"
+    height: 30
+  - file: disc-2026.svg
+    alt: "DISC 2026"
+    height: 64
+  - file: compass-summit.svg
+    alt: "Compass AI & Tech Summit"
+    height: 36
+  - file: big-data-london.png
+    alt: "Big Data London"
+    height: 56
+  - file: data-decoded.png
+    alt: "Data Decoded"
+    height: 40
+  - file: hex-prompt.svg
+    alt: "Hex Prompt 2026"
+    height: 26
+
+# The three "Latest content" cards. Items are fetched automatically
+# by scripts/fetch-feeds.mjs (daily, via GitHub Actions).
+#
+# source types:
+#   youtube-playlist  id = playlist ID (the part after list= in the URL)
+#   youtube-channel   id = channel ID (starts UC…). Shorts are skipped.
+#   rss               url = any RSS/Atom feed
+content:
+  heading: "Follow my content"
+  streams:
+    - key: ai-analyst
+      title: "The AI Analyst"
+      blurb: "Video series on data analysis in the age of AI."
+      source: { type: youtube-playlist, id: PLTxpUfdl7jdJm2jZ8T7VV0zCTV_ARnch9 }
+      link: { label: "All episodes here →", url: "https://aianalyst.howtospeakdata.com/" }
+    - key: chart-chat
+      title: "Chart Chat"
+      blurb: "Video show all about data visualisation."
+      source: { type: youtube-channel, id: UCMHkHXuGJEeHEk8hBDuFTOQ }
+      link: { label: "chartchat.live →", url: "https://www.chartchat.live/" }
+    - key: newsletter
+      title: "How To Speak Data"
+      blurb: "The newsletter."
+      source: { type: rss, url: "https://howtospeakdata.substack.com/feed" }
+      link: { label: "Subscribe on Substack →", url: "https://howtospeakdata.substack.com/" }
+
+books_intro: "I've co-written two of the best-selling books in the data analysis field:"
+
+# cover: a file name in src/assets/books/ (leave "" until you have one)
+books:
+  - title: "Dashboards That Deliver"
+    text: "How to build dashboards people actually use to make decisions."
+    url: https://dashboardsthatdeliver.com/
+    link_label: "dashboardsthatdeliver.com →"
+    cover: dashboards-that-deliver.jpg
+  - title: "The Big Book of Dashboards"
+    text: "Twenty-eight real-world dashboards, examined in full. The reference book."
+    url: http://bigbookofdashboards.com/
+    link_label: "bigbookofdashboards.com →"
+    cover: big-book-of-dashboards.jpg
+
+about:
+  heading: "Andy Cotgreave"
+  # Basic HTML (<em>, <a>) is allowed in these paragraphs.
+  paragraphs:
+    - "Author and independent data advisor. I've spent 20 years persuading people to enjoy data instead of enduring it. As a leader in data communication at Tableau for 15 years, I helped thousands of analysts, executives and teams turn confusing numbers into rational decisions."
+    - "Now I'm focused on how AI is reshaping what it means to be data literate — and what it means for the humans in the room."
+    - "I present <em>The AI Analyst</em>, a series exploring AI's impact on our field. I'm co-author of <em>Dashboards That Deliver</em> and <em>The Big Book of Dashboards</em>, I write the <em>How To Speak Data</em> newsletter, and I co-host <em>Chart Chat</em>, a monthly series on data communication."
+
+work:
+  heading: "Tell me what you need."
+  text: "Want a keynote speaker? Or an emcee? Check. Brand partnerships on The AI Analyst? Check. Mentoring services (dashboards or presentations). Yes please! Grab 30 minutes and we'll work out which one you need."

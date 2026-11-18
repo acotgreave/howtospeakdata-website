@@ -1,0 +1,105 @@
+{
+  "ai-analyst": [
+    {
+      "title": "Hands on with Ridge AI",
+      "url": "https://www.youtube.com/watch?v=XUKDIYavlJY",
+      "date": "2026-09-14",
+      "thumb": "https://i.ytimg.com/vi/XUKDIYavlJY/maxresdefault.jpg"
+    },
+    {
+      "title": "Using AI to build data visualisation teaching tools",
+      "url": "https://www.youtube.com/watch?v=vjQ3iHbE7P0",
+      "date": "2026-08-06",
+      "thumb": "https://i.ytimg.com/vi/vjQ3iHbE7P0/maxresdefault.jpg"
+    },
+    {
+      "title": "Why we're building Ridge AI",
+      "url": "https://www.youtube.com/watch?v=E8w5BA6AOnQ",
+      "date": "2026-07-09",
+      "thumb": "https://i.ytimg.com/vi/E8w5BA6AOnQ/maxresdefault.jpg"
+    },
+    {
+      "title": "Golden Analytics: Ask Me Anything",
+      "url": "https://www.youtube.com/watch?v=jhwuR3CP_ek",
+      "date": "2026-06-01",
+      "thumb": "https://i.ytimg.com/vi/jhwuR3CP_ek/maxresdefault.jpg"
+    },
+    {
+      "title": "The Future of Data is Fake",
+      "url": "https://www.youtube.com/watch?v=9gOOigKYIcM",
+      "date": "2026-05-21",
+      "thumb": "https://i.ytimg.com/vi/9gOOigKYIcM/maxresdefault.jpg"
+    }
+  ],
+  "chart-chat": [
+    {
+      "title": "Chart Chat #75: Why No One Cares about your AI Data Viz Experiments",
+      "url": "https://www.youtube.com/watch?v=P0OA-pec7HQ",
+      "date": "2026-10-15T15:00:00.000Z",
+      "status": "upcoming",
+      "thumb": "https://i.ytimg.com/vi/P0OA-pec7HQ/maxresdefault.jpg"
+    },
+    {
+      "title": "Chart Chat 74: From Research to Practice",
+      "url": "https://www.youtube.com/watch?v=mRHKag-eCXY",
+      "date": "2026-09-10",
+      "thumb": "https://i.ytimg.com/vi/mRHKag-eCXY/maxresdefault.jpg"
+    },
+    {
+      "title": "Chart Chat #73: Mapping Air Quality",
+      "url": "https://www.youtube.com/watch?v=0iCeXV0KvrE",
+      "date": "2026-08-03",
+      "thumb": "https://i.ytimg.com/vi/0iCeXV0KvrE/maxresdefault.jpg"
+    },
+    {
+      "title": "Chart Chat #72: Show and Tell",
+      "url": "https://www.youtube.com/watch?v=7bJ6F9JkFBQ",
+      "date": "2026-07-23",
+      "thumb": "https://i.ytimg.com/vi/7bJ6F9JkFBQ/maxresdefault.jpg"
+    },
+    {
+      "title": "Chart Chat 71: Supercharge v. Sabotage - The Two Faces of AI Data Analysis",
+      "url": "https://www.youtube.com/watch?v=WqP5HXCQeNM",
+      "date": "2026-06-18",
+      "thumb": "https://i.ytimg.com/vi/WqP5HXCQeNM/maxresdefault.jpg"
+    },
+    {
+      "title": "Chart Chat 70: One Chart, Four Ways",
+      "url": "https://www.youtube.com/watch?v=G2QBl8N2-ME",
+      "date": "2026-04-30",
+      "thumb": "https://i.ytimg.com/vi/G2QBl8N2-ME/maxresdefault.jpg"
+    }
+  ],
+  "newsletter": [
+    {
+      "title": "Make With AI, Make Mistakes With AI",
+      "url": "https://howtospeakdata.substack.com/p/make-with-ai-make-mistakes-with-ai",
+      "date": "2026-10-08",
+      "thumb": "https://substackcdn.com/image/fetch/$s_!02NJ!,w_800,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F44549831-5a93-4949-ac7a-300103547e6b_1920x1080.png"
+    },
+    {
+      "title": "I vibe-coded a web page. It spun up deeper thoughts.",
+      "url": "https://howtospeakdata.substack.com/p/i-vibe-coded-a-web-page-it-spun-up",
+      "date": "2026-10-01",
+      "thumb": "https://substackcdn.com/image/fetch/$s_!pVtA!,w_800,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb6c36f8c-a13a-452c-aa2a-505b782dbd61_2875x1613.png"
+    },
+    {
+      "title": "Poll: Are you the Blue or Red Robot?",
+      "url": "https://howtospeakdata.substack.com/p/poll-are-you-the-blue-or-red-robot",
+      "date": "2026-09-24",
+      "thumb": "https://substackcdn.com/image/fetch/$s_!edCM!,w_800,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe694b8b2-b50a-4e19-9e67-286ea04a9bd3_1864x1031.png"
+    },
+    {
+      "title": "Why tech vendors literally tell us to ignore their keynotes.",
+      "url": "https://howtospeakdata.substack.com/p/why-tech-vendors-literally-tell-us",
+      "date": "2026-09-14",
+      "thumb": "https://substackcdn.com/image/fetch/$s_!C3Rm!,w_800,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F65970c04-5c4d-4cc4-9f0a-1c10d4bc6a6e_1903x1071.png"
+    },
+    {
+      "title": "Coming up... Chart Chat and keynotes",
+      "url": "https://howtospeakdata.substack.com/p/coming-up-chart-chat-and-keynotes-2b5",
+      "date": "2026-09-09",
+      "thumb": "https://substack-post-media.s3.amazonaws.com/public/images/3372acef-d429-4e0e-a130-527bf35f8ef9_954x667.png"
+    }
+  ]
+}

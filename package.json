@@ -1,0 +1,21 @@
+{
+  "name": "howtospeakdata-site",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "feeds": "node scripts/fetch-feeds.mjs"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "@fontsource/poppins": "^5.3.0",
+    "@fontsource/source-sans-3": "^5.3.0",
+    "astro": "^7.3.8",
+    "fast-xml-parser": "^5.11.2",
+    "js-yaml": "^5.4.3"
+  }
+}
